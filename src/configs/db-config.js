@@ -1,7 +1,7 @@
 export default {
-    host: 'localhost',
+    host: 'aws-0-us-east-2.pooler.supabase.com',
     port: 5432,
-    user: 'postgres', // Replace with your PostgreSQL username if different
-    password: 'postgres', // Replace with your PostgreSQL password
-    database: 'tp04_db'
+    user: 'postgres.ecixggguhynivdpbuacb',
+    password: 'zoloalan11...', // User-provided password
+    database: 'tp10_dbAlumnos'
 };

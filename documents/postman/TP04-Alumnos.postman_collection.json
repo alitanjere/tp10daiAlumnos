@@ -107,7 +107,7 @@
 						"alumnos"
 					]
 				},
-				"description": "Updates an existing alumno. The `id` in the body specifies which alumno to update. `id_curso` should exist. `hace_deportes` can be true/false or 1/0."
+				"description": "Updates an existing alumno. The `id` in the body specifies which alumno to update. `id_curso` should exist. `hace_deportes` can be true/false or 1/0. Expects a 201 Created status code on successful update."
 			},
 			"response": []
 		},

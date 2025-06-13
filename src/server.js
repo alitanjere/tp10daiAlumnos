@@ -126,7 +126,7 @@ app.put('/api/alumnos', async (req, res) => {
             'UPDATE alumnos SET nombre = $1, apellido = $2, id_curso = $3, fecha_nacimiento = $4, hace_deportes = $5 WHERE id = $6 RETURNING *',
             [nombre, apellido, id_curso, fecha_nacimiento || null, hace_deportes, id]
         );
-        res.status(StatusCodes.OK).json(result.rows[0]); // Changed from 201 to 200 for PUT success as per common practice
+        res.status(StatusCodes.CREATED).json(result.rows[0]);
     } catch (error) {
         console.error(error);
         // Check for foreign key constraint violation for id_curso
