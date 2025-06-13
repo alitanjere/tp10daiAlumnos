@@ -32,7 +32,7 @@ This application uses a PostgreSQL database hosted on Supabase.
     - If the database `tp10_dbAlumnos` does not exist, you can create it, although Supabase projects usually come with a default `postgres` database that can be used. For this project, we are using a specific database name as configured. Often, you connect to the default `postgres` database and the tables are created within its default `public` schema. The `db-config.js` specifies `tp10_dbAlumnos`, so it's best to ensure your connection string targets this or adjust the config. *For simplicity, we will assume tables are created in the default `postgres` database provided by Supabase under its `public` schema, and `tp10_dbAlumnos` in the config refers to this default database context.*
 
 3.  **Create Tables and Insert Data**:
-    The necessary SQL script to create tables (`Pizzas`, `Ingredientes`, `PizzasIngredientes`) and insert initial data is located at `src/configs/database.sql`. You need to run this script against your Supabase database.
+    The necessary SQL script to create tables (`cursos`, `alumnos`, `grupos_pdp`, and `alumnos_grupos_pdp`) and insert initial data is located at `src/configs/database.sql`. This script defines the structure for managing students, courses, and project groups. You need to run this script against your Supabase database.
 
     **Option 1: Using Supabase SQL Editor (Recommended for simplicity)**
     - Open the `src/configs/database.sql` file in your code editor.
@@ -94,9 +94,7 @@ This application uses a PostgreSQL database hosted on Supabase.
 
 ## API Endpoints
 
-The API provides the following endpoints for managing "alumnos" (students). (Note: The original SQL script sets up tables for Pizzas, not Alumnos. This section should be updated if the API indeed manages Alumnos, or the SQL script should be for Alumnos).
-
-Assuming the API is for Alumnos as per `server.js`:
+The API provides the following endpoints for managing "alumnos" (students), which aligns with the schema in `src/configs/database.sql`.
 
 -   `GET /api/alumnos`: Retrieves all alumnos.
 -   `GET /api/alumnos/:id`: Retrieves a specific alumno by ID.
