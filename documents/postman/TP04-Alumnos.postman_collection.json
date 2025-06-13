@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "YOUR_COLLECTION_ID",
+		"name": "TP04-Alumnos API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": "Collection for TP04 Alumnos API endpoints"
+	},
+	"item": [
+		{
+			"name": "Get All Alumnos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/alumnos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"alumnos"
+					]
+				},
+				"description": "Retrieves all alumnos."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Alumno by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/alumnos/{{alumno_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"alumnos",
+						"{{alumno_id}}"
+					]
+				},
+				"description": "Retrieves a specific alumno by their ID. Set `alumno_id` in Postman variables."
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Alumno",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Perez\",\n    \"id_curso\": 1,\n    \"fecha_nacimiento\": \"2000-05-15\",\n    \"hace_deportes\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/alumnos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"alumnos"
+					]
+				},
+				"description": "Creates a new alumno. `id_curso` should exist in the Cursos table. `hace_deportes` can be true/false or 1/0."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Alumno",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1, \n    \"nombre\": \"Juancito\",\n    \"apellido\": \"Perez Actualizado\",\n    \"id_curso\": 2,\n    \"fecha_nacimiento\": \"2000-05-16\",\n    \"hace_deportes\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/alumnos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"alumnos"
+					]
+				},
+				"description": "Updates an existing alumno. The `id` in the body specifies which alumno to update. `id_curso` should exist. `hace_deportes` can be true/false or 1/0."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Alumno by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/alumnos/{{alumno_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"alumnos",
+						"{{alumno_id}}"
+					]
+				},
+				"description": "Deletes a specific alumno by their ID. Set `alumno_id` in Postman variables."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string",
+			"description": "Base URL for the API"
+		},
+		{
+			"key": "alumno_id",
+			"value": "1",
+			"type": "string",
+			"description": "Placeholder for Alumno ID, change as needed for GET by ID and DELETE requests."
+		}
+	]
+}
