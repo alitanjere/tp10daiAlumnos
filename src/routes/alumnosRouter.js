@@ -4,22 +4,18 @@ import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
 
-// GET /api/alumnos
 router.get('/', async (req, res, next) => {
     try {
         const result = await pool.query('SELECT * FROM alumnos');
         res.status(StatusCodes.OK).json(result.rows);
     } catch (error) {
-        // Pasamos el error al siguiente middleware de manejo de errores
         next(error);
     }
 });
 
-// GET /api/alumnos/:id
 router.get('/:id', async (req, res, next) => {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
-        // Creamos un error personalizado para que lo maneje el middleware de errores
         const err = new Error('El ID debe ser numérico.');
         err.status = StatusCodes.BAD_REQUEST;
         return next(err);
@@ -37,11 +33,9 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-// POST /api/alumnos
 router.post('/', async (req, res, next) => {
     const { nombre, apellido, id_curso, fecha_nacimiento, hace_deportes } = req.body;
 
-    // Validations (podrían moverse a un middleware de validación dedicado más adelante)
     if (!nombre || nombre.trim().length < 3) {
         const err = new Error('El nombre es obligatorio y debe tener al menos 3 caracteres.');
         err.status = StatusCodes.BAD_REQUEST;
@@ -87,7 +81,6 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// PUT /api/alumnos/:id (Cambiado para que el ID venga en la URL)
 router.put('/:id', async (req, res, next) => {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -98,7 +91,6 @@ router.put('/:id', async (req, res, next) => {
 
     const { nombre, apellido, id_curso, fecha_nacimiento, hace_deportes } = req.body;
 
-    // Validations
     if (!nombre || nombre.trim().length < 3) {
         const err = new Error('El nombre es obligatorio y debe tener al menos 3 caracteres.');
         err.status = StatusCodes.BAD_REQUEST;
@@ -129,7 +121,6 @@ router.put('/:id', async (req, res, next) => {
     }
 
     try {
-        // Primero verificar si el alumno existe, como se hacía antes, pero usando el id de la URL
         const checkExist = await pool.query('SELECT * FROM alumnos WHERE id = $1', [id]);
         if (checkExist.rows.length === 0) {
             const err = new Error('Alumno no encontrado con el ID proporcionado.');
@@ -141,7 +132,7 @@ router.put('/:id', async (req, res, next) => {
             'UPDATE alumnos SET nombre = $1, apellido = $2, id_curso = $3, fecha_nacimiento = $4, hace_deportes = $5 WHERE id = $6 RETURNING *',
             [nombre, apellido, id_curso, fecha_nacimiento || null, hace_deportes, id]
         );
-        res.status(StatusCodes.OK).json(result.rows[0]); // Cambiado a OK para PUT exitoso
+        res.status(StatusCodes.OK).json(result.rows[0]);
     } catch (error) {
         if (error.code === '23503' && error.constraint === 'alumnos_id_curso_fkey') {
             const err = new Error('El id_curso proporcionado no existe.');
@@ -152,7 +143,6 @@ router.put('/:id', async (req, res, next) => {
     }
 });
 
-// DELETE /api/alumnos/:id
 router.delete('/:id', async (req, res, next) => {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -167,7 +157,6 @@ router.delete('/:id', async (req, res, next) => {
             err.status = StatusCodes.NOT_FOUND;
             return next(err);
         }
-        // En lugar de devolver el alumno, devolvemos un NO_CONTENT que es más estándar para DELETE
         res.status(StatusCodes.NO_CONTENT).send();
     } catch (error) {
         next(error);
