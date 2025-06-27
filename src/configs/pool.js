@@ -5,7 +5,6 @@ const { Pool } = pkg;
 
 const pool = new Pool(dbConfig);
 
-// Opcional: Probar la conexión al crear el pool
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
     console.error('Error al conectar con la base de datos usando el pool:', err.stack);
