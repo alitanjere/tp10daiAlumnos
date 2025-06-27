@@ -1,12 +1,15 @@
 import express from "express";
 import cors from "cors";
 import pkg from 'pg';
+import dotenv from 'dotenv';
+
+dotenv.config();
 import { StatusCodes } from 'http-status-codes';
 import config from './configs/db-config.js';
 
 const { Client } = pkg;
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
